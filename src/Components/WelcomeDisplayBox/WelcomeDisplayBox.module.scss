@@ -1,0 +1,36 @@
+.welcome {
+  width: 45vw;
+  height: auto;
+  margin: 16px;
+  border-radius: 5px;
+  //   255, 170, 0
+  //   rgb(0, 255, 170)
+  h2 {
+    font-size: 45px;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 32px;
+    margin: 16px;
+  }
+
+  .right {
+    text-align: right;
+  }
+}
+.primary {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(165, 252, 223),
+    rgb(0, 255, 170)
+  );
+}
+
+.secondary {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 208, 113),
+    rgb(255, 170, 0)
+  );
+}

@@ -1,0 +1,18 @@
+.inputTxt {
+    border: solid 3px rgb(0, 255, 170);
+    border-radius: 5px;
+    padding: 16px;
+    height: 10%;
+    width: 95%;
+    color: rgb(39, 219, 114);
+    font-weight: bold;
+    background-color: white;
+    font-size: 20px;
+
+  &::placeholder {
+      color: rgb(184, 184, 184);
+      font-weight: bold;
+      padding: 4px;
+  }
+
+}
