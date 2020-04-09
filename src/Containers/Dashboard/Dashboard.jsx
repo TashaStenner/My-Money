@@ -3,9 +3,11 @@ import styles from "./Dashboard.module.scss";
 import InputField from "../../Components/InputField";
 import OutputField from "../../Components/OutputField/OutputField";
 import Navbar from "../../Components/Navbar";
+import { firestore } from "../../firebase";
+
 
 const Dashboard = (props) => {
-  const {user, signOut, addMoneyDetails} = props;
+  const {user, signOut, fetchMoneyDetails} = props;
   const [mainWage, setMainWage] = useState(0);
   const [extraWage, setExtraWage] = useState(0);
   const [houseHold, setHouseHold] = useState(0);
@@ -16,6 +18,30 @@ const Dashboard = (props) => {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalOutGoings, setTotalOutGoings] = useState(0);
   const [totalSavings, setTotalSavings] = useState(0);
+  const [moneyDetails, setMoneyDetails] = useState([]);
+  
+
+  
+  const addMoneyDetails = () => {
+    firestore.collection("users")
+    .doc(user.uid)
+    .set({
+      totalIncome: totalIncome, 
+      totalOutGoings: totalOutGoings, 
+      totalSavings: totalSavings
+    })
+    .then(result => {
+      fetchMoneyDetails();
+      alert("thank you that was registered")
+    })
+    .catch(err => console.log(err));
+  }
+  
+  
+    useEffect(() => {
+      fetchMoneyDetails();
+    });
+
 
   const incomeMath = () => {
     return mainWage === 0 && extraWage === 0
@@ -63,7 +89,7 @@ const Dashboard = (props) => {
         </div>
 
         <div className={styles.inputs}>
-          <h2>My Spending</h2>
+          <h2>My Monthly Spending</h2>
           <InputField
             type={"number"}
             placeholder={"Household bills £"}
@@ -99,6 +125,7 @@ const Dashboard = (props) => {
           />
           <OutputField placeholder={"Total"} total={`Total: £ ${totalSavings}`} />
         </div>
+        <button className={styles.btn} onClick={() => addMoneyDetails()}>Submit This weeks totals</button>
       </section>
     </>
   );

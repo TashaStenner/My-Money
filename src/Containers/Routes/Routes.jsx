@@ -18,25 +18,12 @@ const Routes = (props) => {
       .doc(user.uid)
       .get()
       .then(doc => {
-        console.log(doc.data().moneyDetails);
-        setMoneyDetails(doc.data().moneyDetails)
+        console.log(doc.data());
+        setMoneyDetails(doc.data())
       })
       .catch(err => console.log(err));
     }
   };
-  
-  const addMoneyDetails = money => {
-    firestore.collection("users")
-    .doc(user.uid)
-    .set({
-      moneyDetails: [...moneyDetails, money]
-    })
-    .then(result => {
-      fetchMoneyDetails();
-    })
-    .catch(err => console.log(err));
-  }
-  
   
     useEffect(() => {
       fetchMoneyDetails();
@@ -49,8 +36,8 @@ const Routes = (props) => {
         <LandingPage path="landing-page" signIn={signIn} user={user}/>
 
         <PrivateRoutes path="/" user={user}>
-          <Dashboard path="dashboard" signOut={signOut} user={user} addMoneyDetails={() => addMoneyDetails()}/>
-          <WelcomePage path="welcome-page" signOut={signOut} user={user} fetchDetails={() => fetchMoneyDetails()}/>
+          <Dashboard path="dashboard" signOut={signOut} user={user} fetchMoneyDetails={() => fetchMoneyDetails()}/>
+          <WelcomePage path="welcome-page" signOut={signOut} user={user} fetchDetails={moneyDetails}/>
         </PrivateRoutes>
       </Router>
     </>
