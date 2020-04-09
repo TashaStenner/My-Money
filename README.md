@@ -8,6 +8,7 @@ A app made so that i can work out my money correctly and have a more visual view
 * HTML
 
 ## Still to do 
+* Make it responsive
 * Fix a issue where the bills are over ridden on every entry
 
 ## How to use
